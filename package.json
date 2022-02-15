@@ -1,5 +1,5 @@
 {
-  "name": "curly tube",
+  "name": "curly tubes",
   "source": "index.html",
   "scripts": {
     "start": "parcel index.html --public-url",
