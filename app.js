@@ -81,8 +81,8 @@ export default class Sketch {
     // var frustumSize = 10;
     // var aspect = window.innerWidth / window.innerHeight;
     // this.camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -1000, 1000 );
-    this.camera.position.set(0, 0, 2);
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.camera.position.set(0, 0, 1.2);
+    // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.time = 0;
 
     this.isPlaying = true;
