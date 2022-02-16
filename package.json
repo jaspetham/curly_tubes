@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "gh-pages": "^3.2.3",
+    "gsap": "^3.9.1",
     "simplex-noise": "^3.0.1",
     "three": "^0.137.5"
   },

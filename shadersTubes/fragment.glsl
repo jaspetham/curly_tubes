@@ -30,7 +30,7 @@ float getScatter(vec3 cameraPos, vec3 dir, vec3 lightPos, float d){
 
 void main(){
 
-float dash=sin(vUv.x*50.+time/2.);
+float dash=sin(vUv.x*50.+time);
     if(dash<0.3) discard;
 
     vec3 cameraToWorld = v_worldPosition - cameraPosition;

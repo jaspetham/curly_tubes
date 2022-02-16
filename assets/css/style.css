@@ -1,28 +1,61 @@
-body{
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.font-orbiton {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.font-audio {
+    font-family: 'Audiowide', cursive;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
     overscroll-behavior: none;
+    font-family: 'Orbitron', sans-serif;
 }
 
-*{
-    margin:0;
-    padding:0;
-}
-
-#container{
+#container {
     width: 100vw;
     height: 100vh;
+    position: fixed;
 }
 
-canvas{
-    display: block;
-}
-
-.cursor{
-    background:blue;
-    width: 20px;
-    height: 20px;
+.container-wrap {
+    height: 100%;
+    width: 100%;
     position: absolute;
-    pointer-events: none;
-    z-index: 1000;
-    top:0;
-    left:0;
+}
+
+.banner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+}
+
+.banner::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(40, 40, 40, .6);
+    z-index: 10;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 11;
+    text-align: center;
 }

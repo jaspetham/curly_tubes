@@ -1,3 +1,4 @@
+import gsap from 'gsap'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import vertex from './shaders/vertex.glsl'
@@ -71,19 +72,21 @@ export default class Sketch {
 
     this.container.appendChild(this.renderer.domElement);
 
+    this.cameraGroup = new THREE.Group()
+    this.scene.add(this.cameraGroup)
     this.camera = new THREE.PerspectiveCamera(
       70,
       window.innerWidth / window.innerHeight,
       0.001,
-      1000
+      100
     );
 
-    // var frustumSize = 10;
-    // var aspect = window.innerWidth / window.innerHeight;
-    // this.camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -1000, 1000 );
-    this.camera.position.set(0, 0, 1.2);
+    this.camera.position.set(0, 0, 0.75);
+    this.cameraGroup.add(this.camera)
     // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.clock = new THREE.Clock();
     this.time = 0;
+    this.previousTime = 0;
 
     this.isPlaying = true;
     
@@ -180,7 +183,7 @@ export default class Sketch {
 
     this.geometry = new THREE.PlaneGeometry(1, 1, 1, 1);
 
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 600; i++) {
       let path = new THREE.CatmullRomCurve3(this.getCurve(new THREE.Vector3(
         Math.random() - 0.5,
         Math.random() - 0.5,
@@ -222,13 +225,13 @@ export default class Sketch {
   }
 
   render() {
-    if (!this.isPlaying) return;
-    this.time += 0.05;
-
-    // document.querySelector('.cursor').style.transform = `translate(
-    //   ${this.elasticMouse.x}px,
-    //   ${this.elasticMouse.y}px
-    // )`
+    this.time = this.clock.getElapsedTime()
+    const deltaTime = this.time - this.previousTime
+    this.previousTime = this.time
+    const parallaxX = this.mouse.x * 0.5
+    const parallaxY = this.mouse.y * 0.5
+    this.cameraGroup.position.x += (parallaxX - this.cameraGroup.position.x) * 0.2 * deltaTime
+    this.cameraGroup.position.y += (parallaxY - this.cameraGroup.position.y) * 0.2 * deltaTime
 
     this.temp.copy(this.eMouse).sub(this.elasticMouse).multiplyScalar(.15)
     this.elasticMouseVel.add(this.temp)
@@ -256,3 +259,16 @@ new Sketch({
   dom: document.getElementById("container")
 });
 
+gsap.to('#introTitle',{
+  opacity:1,
+  duration:1.5,
+  y:0,
+  ease:'expo'
+})
+gsap.to('#introText',{
+  opacity:1,
+  duration:1.5,
+  delay:0.5,
+  y:0,
+  ease:'expo'
+})
